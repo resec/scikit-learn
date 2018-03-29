@@ -45,28 +45,24 @@ cdef inline DTYPE_t euclidean_rdist_to_dist(DTYPE_t dist) except -1:
 
 cdef inline DTYPE_t cosine_dist(DTYPE_t* x1, DTYPE_t* x2,
                                 ITYPE_t size) nogil except -1:
-    cdef DTYPE_t d, nx1, nx2=0
+    cdef DTYPE_t d=0, nx1=0, nx2=0
     cdef np.intp_t j
     for j in range(size):
         nx1 += x1[j] * x1[j]
         nx2 += x2[j] * x2[j]
         d += x1[j] * x2[j]
-    nx1 = sqrt(nx1)
-    nx2 = sqrt(nx2)
-    return 1 - d / (nx1 * nx2)
+    return 1. - d / (sqrt(nx1) * sqrt(nx2))
 
 
 cdef inline DTYPE_t inversed_cosine_dist(DTYPE_t* x1, DTYPE_t* x2,
                                          ITYPE_t size) nogil except -1:
-    cdef DTYPE_t d, nx1, nx2=0
+    cdef DTYPE_t d=0, nx1=0, nx2=0
     cdef np.intp_t j
     for j in range(size):
         nx1 += x1[j] * x1[j]
         nx2 += x2[j] * x2[j]
         d += x1[j] * x2[j]
-    nx1 = sqrt(nx1)
-    nx2 = sqrt(nx2)
-    return d / (nx1 * nx2) - 1
+    return 1. + d / (sqrt(nx1) * sqrt(nx2))
 
 
 ######################################################################
