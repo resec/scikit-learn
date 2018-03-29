@@ -11,6 +11,7 @@ __all__ = ['BallTree']
 DOC_DICT = {'BinaryTree': 'BallTree', 'binary_tree': 'ball_tree'}
 
 VALID_METRICS = ['EuclideanDistance', 'SEuclideanDistance',
+                 'CosineDistance', 'InversedCosineDistance',
                  'ManhattanDistance', 'ChebyshevDistance',
                  'MinkowskiDistance', 'WMinkowskiDistance',
                  'MahalanobisDistance', 'HammingDistance',

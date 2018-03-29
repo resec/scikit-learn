@@ -154,6 +154,7 @@ from typedefs cimport DTYPE_t, ITYPE_t, DITYPE_t
 from typedefs import DTYPE, ITYPE
 
 from dist_metrics cimport (DistanceMetric, euclidean_dist, euclidean_rdist,
+                           cosine_dist, inversed_cosine_dist,
                            euclidean_dist_to_rdist, euclidean_rdist_to_dist)
 
 # some handy constants

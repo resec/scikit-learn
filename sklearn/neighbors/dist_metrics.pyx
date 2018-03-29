@@ -86,6 +86,8 @@ METRIC_MAPPING = {'euclidean': EuclideanDistance,
                   'sokalmichener': SokalMichenerDistance,
                   'sokalsneath': SokalSneathDistance,
                   'haversine': HaversineDistance,
+                  'cosine': CosineDistance,
+                  'icosine': InversedCosineDistance,
                   'pyfunc': PyFuncDistance}
 
 
@@ -1012,6 +1014,26 @@ cdef class HaversineDistance(DistanceMetric):
     def dist_to_rdist(self, dist):
         tmp = np.sin(0.5 * dist)
         return tmp * tmp
+
+
+#------------------------------------------------------------
+# Cosine Distance
+#  D(x, y) = 1 - dot(x, y) / (|x| * |y|)
+#
+cdef class CosineDistance(DistanceMetric):
+    cdef inline DTYPE_t dist(self, DTYPE_t* x1, DTYPE_t* x2,
+                             ITYPE_t size) nogil except -1:
+        return cosine_dist(x1, x2, size)
+
+
+#------------------------------------------------------------
+# Inversed Cosine Distance
+#  D(x, y) = dot(x, y) / (|x| * |y|) - 1
+#
+cdef class InversedCosineDistance(DistanceMetric):
+    cdef inline DTYPE_t dist(self, DTYPE_t* x1, DTYPE_t* x2,
+                             ITYPE_t size) nogil except -1:
+        return inversed_cosine_dist(x1, x2, size)
 
 
 #------------------------------------------------------------
